@@ -15,17 +15,26 @@
   <script type="text/javascript">
 
     var icons = {
-      "clear-day" : "B",
-      "clear-night" : "C",
-      "rain" : "R",
-      "snow" : "G",
-      "sleet": "X",
-      "wind" : "S",
-      "fog" : "N",
-      "cloudy" : "Y",
-      "partly-cloudy-day" : "H",
-      "partly-cloudy-night" : "I"
-    };
+                  "clear-day" : "B",
+                  "clear-night" : "C",
+                  "rain" : "R",
+                  "snow" : "G",
+                  "sleet": "X",
+                  "wind" : "S",
+                  "fog" : "N",
+                  "cloudy" : "Y",
+                  "partly-cloudy-day" : "H",
+                  "partly-cloudy-night" : "I"
+                  };
+
+      var cities = {
+                  "new york"      : {coords: { latitude: 40.672060,  longitude: -73.983898 }},
+                  "los angeles"   : {coords: { latitude: 34.101422,  longitude: -118.3412224 }},
+                  "chicago"       : {coords: { latitude: 41.879003,  longitude: -87.63675 }},
+                  "san francisco" : {coords: { latitude: 37.7885331, longitude: -122.407237 }},
+                  "miami"         : {coords: { latitude: 25.790176, longitude: -80.140133 }},
+                  "current location" : ""
+      };
 
      function loadWeather(){
       var forecastURL = "https://api.forecast.io/forecast/dec9a3c0b8883f17742f3a9e8e702c11/37.8267,-122.423";
@@ -39,7 +48,7 @@
           console.log(json);
           $('#current_temp').html(Math.round(json.currently.temperature) + '&#176;F');
           $('#current_summary').html(json.currently.summary);
-          $('#current_temp').attr('data-icon',)
+          $('#current_temp').attr('data-icon', icons[json.currently.icon]);
         },
         error: function(e){
           console.log(e.message);
@@ -47,8 +56,16 @@
       });
      }
 
+     function loadCity(city){
+      $('#location').html(city);
+     }
+
      $(document).ready(function(){
         loadWeather();
+
+        $('a.city').bind('click', function(){
+          loadCity($(this).html());
+        })
      });
 
   </script>
@@ -76,8 +93,8 @@
       <a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
     </div>
     <div data-role="content" class="content">
-      <h1 id="current_temp" class="icon" data-icon="Z">65 &#176;F</h1>
-      <p id="current_summary">Partly cloudy</p>
+      <h1 id="current_temp" class="icon" data-icon=""></h1>
+      <p id="current_summary"></p>
       <p id="lacation">Current Location</p>
     </div>
     <!-- <div data-role="footer"></div> -->
