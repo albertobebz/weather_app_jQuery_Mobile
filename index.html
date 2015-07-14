@@ -41,26 +41,31 @@
 
      function loadWeather(cityCoords){
 
-      var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
+        var latlng = cityCoords.coords.latitude + "," + cityCoords.coords.longitude;
 
-      var forecastURL = "https://api.forecast.io/forecast/dec9a3c0b8883f17742f3a9e8e702c11/" + latlng;
+        var forecastURL = "API KEY HERE" + latlng;
 
-      $.ajax({
-        url: forecastURL,
-        jsonpCallback: 'jsonpCallback',
-        contentType: 'application/json',
-        dataType: 'jsonp',
-        success: function(json){
-          console.log(json);
-          $('#current_temp').html(Math.round(json.currently.temperature) + '&#176;F');
-          $('#current_summary').html(json.currently.summary);
-          $('#current_temp').attr('data-icon', icons[json.currently.icon]);
-        },
-        error: function(e){
-          console.log(e.message);
-        }
-      });
-     }
+        // creating the AJAX request
+        $.ajax({
+          url: forecastURL,
+          jsonpCallback: 'jsonpCallback',
+          contentType: 'application/json',
+          dataType: 'jsonp',
+          success: function(json){
+            console.log(json);
+            // display the data that are coming back from the API in the wensite using $('#') selector
+            $('#current_temp').html(Math.round(json.currently.temperature) + '&#176;F');
+            $('#humidity').html("Humidity: " + json.currently.humidity);
+            $('#current_summary').html(json.currently.summary);
+            // change the attribute for the data-icon depending on what we retrive from Location currently.icon API
+            $('#current_temp').attr('data-icon', icons[json.currently.icon]);
+          },
+          error: function(e){
+            console.log(e.message);
+          }
+        });
+
+     } // loadWeather()
 
      function loadCity(city){
       $('#location').html(city);
@@ -84,6 +89,7 @@
      $(document).ready(function(){
         loadCity('Chicago');
 
+        // .bind() add a click event to the a.city 
         $('a.city').bind('click', function(){
           loadCity($(this).html());
         })
@@ -115,10 +121,10 @@
     </div>
     <div data-role="content" class="content">
       <h1 id="current_temp" class="icon" data-icon=""></h1>
+      <h3 id="humidity"></h3>
       <p id="current_summary"></p>
-      <p id="lacation">Current Location</p>
+      <p id="location"></p>
     </div>
-    <!-- <div data-role="footer"></div> -->
   </div>
 
 </body>
