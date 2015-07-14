@@ -12,6 +12,31 @@
 
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 
+  <script type="text/javascript">
+
+     function loadWeather(){
+      var forecastURL = "https://api.forecast.io/forecast/dec9a3c0b8883f17742f3a9e8e702c11/37.8267,-122.423";
+
+      $.ajax({
+        url: forecastURL,
+        jsonpCallback: 'jsonpCallback',
+        contentType: 'application/json',
+        dataType: 'jsonp',
+        success: function(json){
+          console.log(json);
+        },
+        error: function(e){
+          console.log(e.message);
+        }
+      });
+     }
+
+     $(document).ready(function(){
+        loadWeather();
+     });
+
+  </script>
+
 </head>
 <body>
   
