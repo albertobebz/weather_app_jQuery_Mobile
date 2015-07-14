@@ -15,13 +15,16 @@
   
   <div data-role="page">
 
-    <div data-role="panel" id="left-panel">
-    <!-- panel content goes here -->
-     </div><!-- /panel -->
+    <div data-role="panel" id="left-panel" data-theme="c">
+      <ul data-theme="a">
+        <li>Close</li>
+        <li></li>
+      </ul>
+    </div><!-- /panel -->
 
     <div data-role="header" data-position="fixed" data-theme="c">
       <h1>My weather app</h1>
-      <a href="#" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
+      <a href="#left-panel" data-icon="bars" data-role="button" data-iconpos="notext" data-iconshadow="false">Menu</a>
     </div>
     <div data-role="content">
       <h1 id="current_temp">65 &#176;F</h1>
